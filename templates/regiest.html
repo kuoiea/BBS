@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <script src="/static/bootstrap/js/bootstrap.js"></script>
+    <script src="/static/jquery.js"></script>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+
+        }
+
+        li{
+            list-style: none;
+        }
+
+        .error{
+            color: red;
+        }
+
+
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <form action="" method="post">
+                {% csrf_token %}
+                <h3>用户注册</h3>
+                <div class="form-group">
+                    <label for="exampleInputUserName">用户名</label>
+                    <input type="text" class="form-control" id="exampleInputUserName" placeholder="UserName" name="name">
+                    <span class="user_error pull-right error">{{ error_msg.name }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">密码</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="pwd">
+                    <span class="pwd_error pull-right error">{{ error_msg.pwd }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword2">确认密码</label>
+                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="r_pwd">
+                    <span class="r_pwd_error pull-right error">
+                    {% if g_error %}
+                        {{ g_error }}
+                    {% else %}
+                        {{ error_msg.r_pwd }}
+                    {% endif %}
+                    </span>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">邮箱地址</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" name="email">
+                    <span class="email_error pull-right error">{{ error_msg.email }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputTel">手机号码</label>
+                    <input type="number" class="form-control" id="exampleInputTel" placeholder="TEL" name="tel">
+                    <span class="tel_error pull-right error">{{ error_msg.tel }}</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputFile">用户头像</label>
+                    <input type="file" id="exampleInputFile">
+                    <p class="help-block">请选择用户头像并上传</p>
+                </div>
+
+
+                <input type="submit">
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

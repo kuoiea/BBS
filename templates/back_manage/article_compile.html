@@ -1,0 +1,58 @@
+{% extends "back_manage/back_manage_base.html" %}
+{% block body %}
+
+    <h3>编辑文章</h3>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div id="edit_title">
+            <b>标题</b>
+            <br>
+            <input name="Editor$Edit$txbTitle" type="text" maxlength="200" id="Editor_Edit_txbTitle" value="article_obj.title" style="width:99%;">
+        </div>
+        <div class="content form-group clearfix">
+            <label for="">内容(Kindeditor编辑器，不支持拖放/粘贴上传图片) </label>
+            <div>
+                <textarea name="content" id="article_content" cols="30" rows="10">{{ article_obj.content }}</textarea>
+            </div>
+
+            <div class="checx">
+                <ul>
+                    {% for cate in cate_list %}
+                        <li>{{ cate.title }}<input type="radio" name="cate" value="{{ cate.pk }}"></li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                <ul>
+                    {% for tag in tags %}
+                        <li>{{ tag.title }} <input type="checkbox" name="tags" value="{{ tag.pk }}"></li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+
+            <input type="submit" class="btn btn-default small">
+        </div>
+
+    </form>
+
+
+    <script charset="utf-8" src="/static/kindeditor/kindeditor-all.js"></script>
+    <script charset="utf-8" src="/static/kindeditor/lang/zh-CN.js"></script>
+    <script>
+        KindEditor.ready(function (K) {
+            window.editor = K.create('#article_content', {
+                width: 840,
+                height: 600,
+                resizeType: 1,
+                uploadJson: "/upload/",
+                extraFileUploadParams: {
+                    csrfmiddlewaretoken: $("[name='csrfmiddlewaretoken']").val()
+                },
+                filePostName: "upload_img"
+
+            });
+        });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for arcitle in arcitle_list %}
+        <h5><a href="/{{ arcitle.user }}/articles/{{ arcitle.pk }}/">{{ arcitle.title }}</a></h5>
+
+        <div>
+
+                    <span class="media-right">
+                        {{ arcitle.desc }}
+                    </span>
+        </div>
+
+        <div class="info small">
+            <a href="">{{ acticle.user.username }}</a>&nbsp;&nbsp;
+            发布于<span>{{ arcitle.create_time|date:'Y-m-d H:i' }}</span>&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-comment"></span>&nbsp;<a
+                href="/{{ arcitle.user }}/articles/{{ arcitle.pk }}/">评论数({{ arcitle.comment_count }})</a>&nbsp;&nbsp;
+            <span class="glyphicon glyphicon-thumbs-up"></span>&nbsp;<a
+                href="/{{ arcitle.user }}/articles/{{ arcitle.pk }}/">点赞数({{ arcitle.up_count }})</a>
+
+
+        </div>
+        <hr>
+
+
+    {% endfor %}
+{% endblock %}
